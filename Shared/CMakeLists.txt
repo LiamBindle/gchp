@@ -1,9 +1,32 @@
-set (alldirs
-  GMAO_mpeu GMAO_pilgrim GMAO_etc
+cmake_minimum_required(VERSION 3.5)
+project(MAPL VERSION 0.0.0 LANGUAGES C CXX Fortran)
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+
+include (esma_check_if_debug)
+include (esma_set_this)
+include (esma_add_subdirectories)
+include (esma_add_library)
+include (esma_generate_automatic_code)
+include (esma_create_stub_component)
+include (esma_fortran_generator_list)
+include (${CMAKE_Fortran_COMPILER_ID})
+
+set(F2PY_SUFFIX .so)
+
+esma_check_if_debug()
+
+esma_add_subdirectories(
+  GMAO_mpeu
+  GMAO_pilgrim
+  # GMAO_etc
   GMAO_pFIO 
   MAPL_Base 
-  GEOS_Shared GMAO_hermes GEOS_Util 
-  Chem_Base Chem_Shared
+  GEOS_Shared
+  GMAO_hermes
+  GEOS_Util 
+  Chem_Base
+  Chem_Shared
   LANL_Shared
   GMAO_perllib
   )
@@ -11,8 +34,6 @@ set (alldirs
 if (PFUNIT)
   add_subdirectory (MAPL_pFUnit EXCLUDE_FROM_ALL)
 endif ()
-
-esma_build_subcomponents (${alldirs})
 
 # Special cases - MAPL_cfio, GMAO_gfio, and GFDL_fms are built twice with two
 # different precisions.
