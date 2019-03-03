@@ -46,7 +46,7 @@ set (srcs
   MAPL_IntegerVector.F90 
   MAPL_StringVector.F90 
   MAPL_StringIntegerMap.F90 
-  MAPL_Integer64GridFactoryMap.F90 
+  # MAPL_Integer64GridFactoryMap.F90 
   MAPL_StringGridFactoryMap.F90 
   MAPL_StringGridMap.F90
   MAPL_StringRouteHandleMap.F90 
@@ -71,6 +71,8 @@ set (srcs
 
 esma_add_library(${this} SRCS ${srcs} DEPENDENCIES GMAO_pFIO MAPL_cfio_r4)
 target_compile_options (${this} PRIVATE $<$<COMPILE_LANGUAGE:Fortran>:${OpenMP_Fortran_FLAGS}>)
+target_link_libraries(${this} PUBLIC ${NETCDF_LIBRARIES})
+target_include_directories(${this} PUBLIC ${NETCDF_F90_INCLUDE_DIR})
 
 # Kludge for OSX security and DYLD_LIBRARY_PATH ...
 foreach(dir ${OSX_EXTRA_LIBRARY_PATH})

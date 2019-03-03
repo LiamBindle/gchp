@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 project(MAPL VERSION 0.0.0 LANGUAGES C CXX Fortran)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/../CMakeScripts)
 
 include (esma_check_if_debug)
 include (esma_set_this)
@@ -14,13 +15,20 @@ include (${CMAKE_Fortran_COMPILER_ID})
 
 set(F2PY_SUFFIX .so)
 
+find_package(NetCDF REQUIRED COMPONENTS F90)
+find_package(MPI REQUIRED)
+find_package(OpenMP REQUIRED)
+#find_package(MKL REQUIRED)
+find_package(Threads REQUIRED)
+
+set(INC_NETCDF ${NETCDF_F90_INCLUDE_DIR})
 esma_check_if_debug()
 
 esma_add_subdirectories(
   GMAO_mpeu
   GMAO_pilgrim
-  # GMAO_etc
-  GMAO_pFIO 
+  #GMAO_etc
+  #GMAO_pFIO 
   MAPL_Base 
   GEOS_Shared
   GMAO_hermes
