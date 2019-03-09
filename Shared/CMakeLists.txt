@@ -16,6 +16,7 @@ include (${CMAKE_Fortran_COMPILER_ID})
 set(F2PY_SUFFIX .so)
 
 find_package(NetCDF REQUIRED COMPONENTS F90)
+message(">>>> ${NETCDF_LIBRARIES}")
 find_package(MPI REQUIRED)
 find_package(OpenMP REQUIRED)
 #find_package(MKL REQUIRED)
@@ -28,15 +29,15 @@ esma_add_subdirectories(
   GMAO_mpeu
   GMAO_pilgrim
   #GMAO_etc
-  #GMAO_pFIO 
+  GMAO_pFIO 
   MAPL_Base 
   GEOS_Shared
   GMAO_hermes
-  GEOS_Util 
-  Chem_Base
-  Chem_Shared
-  LANL_Shared
-  GMAO_perllib
+  #GEOS_Util 
+  #Chem_Base
+  #Chem_Shared
+  #LANL_Shared
+  #GMAO_perllib
   )
 
 if (PFUNIT)

@@ -75,6 +75,19 @@ set (srcs
   ExtDataCollection.F90
   #HistoryCollection.F90
 
+  # [Liam]: my additions
+  AddCollectionMessage.F90
+  CollectionIdMessage.F90
+  RequestIdMessage.F90
+  RequestDataMessage.F90
+  CollectiveRequestDataMessage.F90
+  MemReference.F90
+  MessageQueue.F90
+  SimpleDirectoryService.F90
+  OpenMPServer.F90
+  SimpleServer.F90
+  # end
+
   IntegerMessageMap.F90
   IntegerRequestMap.F90
   #MessageVector.F90
@@ -94,7 +107,7 @@ set (srcs
 esma_add_library(${this} SRCS ${srcs})
 
 #--------------------
-target_include_directories (${this} PUBLIC ${INC_ESMF} ${INC_gFTL} ${INC_NETCDF})
+target_include_directories (${this} PUBLIC ${INC_ESMF} ${INC_gFTL} ${INC_NETCDF} ${MPI_Fortran_INCLUDE_PATH})
 target_link_libraries (${this} PUBLIC ${ESMF_LIBRARIES} ${MPI_Fortran_LIBRARIES})
 
 include_directories (${INC_FLAP})

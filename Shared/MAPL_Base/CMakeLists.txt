@@ -4,6 +4,7 @@ add_definitions(-DMAPL)
 add_definitions(-DDO_COMMAS)
 add_definitions(-DTWO_SIDED_COMM)
 add_definitions(-DUSE_CUBEDSPHERE)
+add_definitions(-DH5_HAVE_PARALLEL)
 
 if(CMAKE_Fortran_COMPILER_ID STREQUAL "Intel")
   if(CMAKE_Fortran_COMPILER_VERSION VERSION_LESS 20)
@@ -34,7 +35,7 @@ set (srcs
   MAPL_VerticalInterpMod.F90 # MAPL_ESMFTimeVectorMod.F90  MAPL_TimeMethods.F90 MAPL_ServerManager.F90
 
   MAPL_DirPath.F90
-  # MAPL_AbstractRegridder.F90 
+  MAPL_AbstractRegridder.F90 
   MAPL_IdentityRegridder.F90
   Regrid_Functions_Mod.F90
   MAPL_EsmfRegridder.F90 MAPL_LatLonToLatLonRegridder.F90 MAPL_TilingRegridder.F90
@@ -46,7 +47,7 @@ set (srcs
   MAPL_IntegerVector.F90 
   MAPL_StringVector.F90 
   MAPL_StringIntegerMap.F90 
-  # MAPL_Integer64GridFactoryMap.F90 
+  MAPL_Integer64GridFactoryMap.F90 
   MAPL_StringGridFactoryMap.F90 
   MAPL_StringGridMap.F90
   MAPL_StringRouteHandleMap.F90 
@@ -80,12 +81,12 @@ foreach(dir ${OSX_EXTRA_LIBRARY_PATH})
 endforeach()
 
 
-add_executable (cub2latlon.x cub2latlon_regridder.F90)
-add_executable (Regrid_Util.x Regrid_Util.F90)
-target_link_libraries (cub2latlon.x ${this} GMAO_pFIO ${ESMF_LIBRARIES} ${MPI_Fortran_LIBRARIES} ${OpenMP_Fortran_LIBRARIES})
-set_target_properties (cub2latlon.x PROPERTIES Fortran_MODULE_DIRECTORY ${esma_include}/${this} LINK_FLAGS "${OpenMP_Fortran_FLAGS}")
-target_link_libraries (Regrid_Util.x ${this} GMAO_pFIO ${ESMF_LIBRARIES} ${MPI_Fortran_LIBRARIES} ${OpenMP_Fortran_LIBRARIES})
-set_target_properties (Regrid_Util.x PROPERTIES Fortran_MODULE_DIRECTORY ${esma_include}/${this} LINK_FLAGS "${OpenMP_Fortran_FLAGS}")
+#add_executable (cub2latlon.x cub2latlon_regridder.F90)
+#add_executable (Regrid_Util.x Regrid_Util.F90)
+#target_link_libraries (cub2latlon.x ${this} GMAO_pFIO ${ESMF_LIBRARIES} ${MPI_Fortran_LIBRARIES} ${OpenMP_Fortran_LIBRARIES})
+#set_target_properties (cub2latlon.x PROPERTIES Fortran_MODULE_DIRECTORY ${esma_include}/${this} LINK_FLAGS "${OpenMP_Fortran_FLAGS}")
+#target_link_libraries (Regrid_Util.x ${this} GMAO_pFIO ${ESMF_LIBRARIES} ${MPI_Fortran_LIBRARIES} ${OpenMP_Fortran_LIBRARIES})
+#set_target_properties (Regrid_Util.x PROPERTIES Fortran_MODULE_DIRECTORY ${esma_include}/${this} LINK_FLAGS "${OpenMP_Fortran_FLAGS}")
 
 if (EXTENDED_SOURCE)
 #    target_compile_options (${this} PRIVATE $<$<COMPILE_LANGUAGE:Fortran>:${EXTENDED_SOURCE}>)
