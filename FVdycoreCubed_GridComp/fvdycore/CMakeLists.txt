@@ -56,7 +56,7 @@ include_directories (${INC_NETCDF})
 
 add_definitions (-DMAPL_MODE -DSKIP_NO_QUAD_PRECISION -DREAD_GRID -DNO_GRID_G -DSPMD -DTIMING)
 
-add_library (${this} ${srcs})
+esma_add_library(${this} SRCS ${srcs})
 set_target_properties (${this} PROPERTIES Fortran_MODULE_DIRECTORY ${include_${this}})
 
 if (FV_PRECISION MATCHES R4)

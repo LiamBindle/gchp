@@ -1,6 +1,7 @@
-esma_set_this ()
+# Miscellaneous configuration
+set(FV_PRECISION R4)
 
-set (alldirs fvdycore)
+esma_set_this ()
 
 set (srcs
   sw.f90 jw.f90 testcases_3_4_5_6_stand_alone.f90
@@ -16,17 +17,18 @@ set (srcs
   LatLonToCubeRegridder.F90 
   CubeToCubeRegridder.F90
   CubeToLatLon.F90
-  )
+)
 
-include_directories (${include_FVdycoreCubed_GridComp})
-include_directories (${include_fvdycore})
-include_directories (${include_MAPL_Base})
-include_directories (${include_GMAO_hermes})
-include_directories (${include_GMAO_mpeu})
-include_directories (${include_GEOS_shared})
-include_directories (${INC_ESMF})
+# include_directories (${include_FVdycoreCubed_GridComp})
+# include_directories (${include_fvdycore})
+# include_directories (${include_MAPL_Base})
+# include_directories (${include_GMAO_hermes})
+# include_directories (${include_GMAO_mpeu})
+# include_directories (${include_GEOS_shared})
+# include_directories (${INC_ESMF})
 
-add_library (${this} ${srcs})
+esma_add_library(${this} SRCS ${srcs})
+
 if (CRAY_POINTER)
   set_target_properties (${this} PROPERTIES COMPILE_FLAGS ${CRAY_POINTER})
 endif()
@@ -50,14 +52,14 @@ foreach(flag ${tmp})
 endforeach()
 
 
-add_executable (StandAlone_FV3_Dycore.x StandAlone_FV3_Dycore.F90)
-set_target_properties (StandAlone_FV3_Dycore.x PROPERTIES LINK_FLAGS "${OpenMP_Fortran_FLAGS}")
-target_link_libraries(StandAlone_FV3_Dycore.x ${this} MAPL_Base GMAO_pFIO)
+# add_executable (StandAlone_FV3_Dycore.x StandAlone_FV3_Dycore.F90)
+# set_target_properties (StandAlone_FV3_Dycore.x PROPERTIES LINK_FLAGS "${OpenMP_Fortran_FLAGS}")
+# target_link_libraries(StandAlone_FV3_Dycore.x ${this} MAPL_Base GMAO_pFIO)
 
-add_executable (rs_scale.x rs_scale.F90)
-set_target_properties (rs_scale.x PROPERTIES LINK_FLAGS "${OpenMP_Fortran_FLAGS}")
-target_link_libraries(rs_scale.x ${this} )
+# add_executable (rs_scale.x rs_scale.F90)
+# set_target_properties (rs_scale.x PROPERTIES LINK_FLAGS "${OpenMP_Fortran_FLAGS}")
+# target_link_libraries(rs_scale.x ${this} )
 
-esma_config_subcomponents (${this} ${alldirs})
+# esma_config_subcomponents (${this} ${alldirs})
 
-
+add_subdirectory(fvdycore)
