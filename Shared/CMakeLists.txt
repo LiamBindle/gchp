@@ -55,3 +55,6 @@ add_dependencies (GMAO_gfio_r4 GMAO_gfio_r8)
 
 add_subdirectory (GFDL_fms GFDL_fms_r4)
 add_subdirectory (GFDL_fms GFDL_fms_r8)
+
+set(FV_PRECISION R4)
+add_subdirectory(FVdycoreCubed_GridComp)

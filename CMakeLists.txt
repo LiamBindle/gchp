@@ -6,7 +6,6 @@ include(GC-ConfigureGCHPBuild)
 
 # Add MAPL and FVdycore
 add_subdirectory(Shared)
-add_subdirectory(FVdycoreCubed_GridComp)
 
 # Add GIGC library
 add_library(GIGC STATIC
