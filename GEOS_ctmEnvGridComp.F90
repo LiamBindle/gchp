@@ -13,6 +13,7 @@
 ! !USES:
       use ESMF
       use MAPL_Mod
+	  use FV_StateMod, only: fv_computeMassFluxes_r4
       use FV_StateMod, only : fv_computeMassFluxes_r8
       use m_set_eta,  only : set_eta
 
