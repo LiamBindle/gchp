@@ -13,8 +13,8 @@
 ! !USES:
       use ESMF
       use MAPL_Mod
-	  use FV_StateMod, only: fv_computeMassFluxes_r4
-      use FV_StateMod, only : fv_computeMassFluxes_r8
+	  ! use FV_StateMod, only : fv_computeMassFluxes_r8  [attn: Liam]
+	  use FV_StateMod, only : fv_computeMassFluxes
       use m_set_eta,  only : set_eta
 
       implicit none
@@ -533,7 +533,8 @@
       integer               :: km, k, is, ie, js, je, lm, l, ik
       integer               :: ndt, isd, ied, jsd, jed
       real(r8), allocatable :: AP(:), BP(:)
-      real(r8)              :: dt
+      !real(r8)              :: dt [attn: Liam] FVPRC is REAL4
+	  real(r4)              :: dt
 
       ! Dry pressure calculations
       integer               :: i, j
@@ -664,8 +665,10 @@
       ! Use dry pressure at the start of the timestep to calculate mass
       ! fluxes. GMAO method uses mid-step UC, VC and PLE?
       PLEr8 = 1.00d0*(DryPLE0r8)
-      call fv_computeMassFluxes_r8(UCr8, VCr8, PLEr8, &
-                                   MFXr8, MFYr8, CXr8, CYr8, dt)
+      !call fv_computeMassFluxes_r8(UCr8, VCr8, PLEr8, &          [attn: Liam]
+      !                             MFXr8, MFYr8, CXr8, CYr8, dt)
+      call fv_computeMassFluxes(UCr8, VCr8, PLEr8, &
+                                MFXr8, MFYr8, CXr8, CYr8, dt)
 
       !DEALLOCATE( UCr8, VCr8, PLEr8, PLE0, PLE1, DryPLE0, DryPLE1 )
       DEALLOCATE( UCr8, VCr8, PLEr8 )
