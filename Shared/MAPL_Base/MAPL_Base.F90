@@ -68,6 +68,9 @@ public MAPL_Leap
 public MAPL_Range
 public MAPL_DistGridGet
 public MAPL_GridGetCorners
+! [lrb 2019-03-21: Making MAPL_GridGetInterior public
+public MAPL_GridGetInterior
+! ]
 
 ! !PUBLIC PARAMETERS
 !
@@ -150,6 +153,11 @@ integer, public, parameter :: MAPL_HorzTransOrderSample   = 99
 integer, public, parameter :: MAPL_RestartOptional = 0
 integer, public, parameter :: MAPL_RestartSkip = 1
 integer, public, parameter :: MAPL_RestartRequired = 2
+
+! [Liam: 2019-03-21] Added missing enums. Pulled from previous GCHP version
+! https://github.com/LiamBindle/gchp/blob/7a4589c276876b6674800f4e4137b575e4def4f5/Shared/MAPL_Base/MAPL_Base.F90#L144
+integer, public, parameter :: MAPL_RestartBootstrap= 3
+integer, public, parameter :: MAPL_RestartSkipInitial= 4
 
 character(len=ESMF_MAXSTR), public, parameter :: MAPL_StateItemOrderList = 'MAPL_StateItemOrderList'
 character(len=ESMF_MAXSTR), public, parameter :: MAPL_BundleItemOrderList = 'MAPL_BundleItemOrderList'
