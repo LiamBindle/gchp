@@ -8153,6 +8153,8 @@ module MAPL_IOMod
    irec = cwrd/4
    filetype = irec
    if (cwrd /= 4*irec) then
+      print *, 'ERROR: File not recognized as HDF5 or fortran binary: ' // &
+               TRIM(filename)
       _RETURN(ESMF_FAILURE)
    end if
 
@@ -8626,7 +8628,7 @@ module MAPL_IOMod
           min  = 0
           sec  = 0
         else
-          print *, 'ParseTimeUnits: Assuming a starting time of 00z'
+          if ( mapl_am_i_root() ) print *, 'ParseTimeUnits: Assuming a starting time of 00z'
           hour = 0
           min  = 0
           sec  = 0

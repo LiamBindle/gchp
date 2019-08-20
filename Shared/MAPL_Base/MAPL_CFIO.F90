@@ -5088,6 +5088,7 @@ CONTAINS
     real, pointer    :: levsfile(:) => null()
     type(ESMF_CFIO), pointer :: cfiop
     type(CFIOCollection), pointer :: collection
+    character(len=255):: msg
 
     call ESMF_VMGetCurrent(vm,rc=status)
     _VERIFY(STATUS)
@@ -5171,7 +5172,12 @@ CONTAINS
                 exit
              endif
           enddo
-          _ASSERT(found, 'search failed')
+          if ( .NOT. found ) then
+             msg = 'ERROR: File search failed for variable name ' //       &
+                   trim(bundlevarname) // ' in file ' // trim(MCFIO%fname) &
+                   // '. Check that ExtData.rc contains correct variable name.'
+             _ASSERT(found, msg)
+          endif
           mcfio%varname(i)=bundleVarName
           if (twoD) then
              mcfio%vardims(i)=2
@@ -5572,6 +5578,11 @@ CONTAINS
         _VERIFY(status)
         
         regridder => new_regridder_manager%make_regridder(src_grid, dst_grid, regrid_method=mcfio%regrid_method, rc=status)
+        ! GCHP error handling. This issue is fixed in a newer version of MAPL.
+        if ( status /= 0 ) then
+           print *, 'ERROR: cannot create ESMF regridder for var in file. This may be because source grid is too coarse for number of cores. Try reducing number of cores for the simulation.'
+           print *, trim(mcfio%fname)
+        endif
         _VERIFY(status)
 
         _RETURN(ESMF_SUCCESS)

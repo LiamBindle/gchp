@@ -927,6 +927,11 @@ CONTAINS
 
       item => self%primary%item(i)
 
+      ! debugging
+      IF ( (Ext_Debug > 0) .AND. MAPL_Am_I_Root() ) THEN
+         Write(*,*) 'ExtData Initialize_: PrimaryLoop: ', trim(item%name)
+      ENDIF 
+
       item%collection_id = MAPL_CFIOAddCollection(item%file)
 
       ! parse refresh template to see if we have a time shift during constant updating
@@ -3016,6 +3021,7 @@ CONTAINS
         end if
         iEntry = targDOW + 1 + monthOffset
         fileTime = tSeries(iEntry)
+        tindex = iEntry
         If (Mapl_Am_I_Root().and.(Ext_Debug > 0)) Then
            Write(*,'(a,I4,a,I4,4(a))') '               GetBracketTimeOnSingleFile: Reading data for DOW ',targDOW,' (entry ', iEntry, ') into bracket ', Trim(bSide)
            Write(*,'(a,a)') &

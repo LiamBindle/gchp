@@ -40,7 +40,6 @@ RUN_DIR :=$(shell pwd)
 # Log files that will be written to the log directory
 BUILD_LOG  :="$(RUN_DIR)/compile.log"
 GCHP_LOG   :="$(RUN_DIR)/GCHP.log"
-LAST_BUILD :="$(RUN_DIR)/lastbuild"
 
 # Executables
 EXE :=geos
@@ -103,23 +102,26 @@ build_all_debug:
 
 # Build without cleaning
 build_esmf:
+	rm -f geos
+	rm -f $(CODEDIR_GC)/bin/geos
 	date > ${BUILD_LOG}
 	rm -f $(CODEDIR_GCHP)/ESMF/esmf.install
 	rm -f $(CODEDIR_GCHP)/Shared/mapl.install
 	rm -f $(CODEDIR_GCHP)/FVdycoreCubed_GridComp/fvdycore.install
 	./build.sh build 2>&1 | tee -a $(BUILD_LOG)
 	@$(MAKE) printbuildinfo 2>&1 | tee -a $(BUILD_LOG)
-	@$(MAKE) printbuildinfo > $(LAST_BUILD)
+
 
 # Build with GEOS-Chem core debug flags and without cleaning
 build_esmf_debug:
+	rm -f geos
+	rm -f $(CODEDIR_GC)/bin/geos
 	date > ${BUILD_LOG}
 	rm -f $(CODEDIR_GCHP)/ESMF/esmf.install
 	rm -f $(CODEDIR_GCHP)/Shared/mapl.install
 	rm -f $(CODEDIR_GCHP)/FVdycoreCubed_GridComp/fvdycore.install
 	./build.sh build --debug 2>&1 | tee -a $(BUILD_LOG)
 	@$(MAKE) printbuildinfo 2>&1 | tee -a $(BUILD_LOG)
-	@$(MAKE) printbuildinfo > $(LAST_BUILD)
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #  Compile MAPL, FVdycore, and GEOS-Chem but not ESMF %
@@ -127,21 +129,23 @@ build_esmf_debug:
 
 # Build without cleaning
 build_mapl:
+	rm -f geos
+	rm -f $(CODEDIR_GC)/bin/geos
 	date > ${BUILD_LOG}
 	rm -f $(CODEDIR_GCHP)/Shared/mapl.install
 	rm -f $(CODEDIR_GCHP)/FVdycoreCubed_GridComp/fvdycore.install
 	./build.sh build 2>&1 | tee -a $(BUILD_LOG)
 	@$(MAKE) printbuildinfo 2>&1 | tee -a $(BUILD_LOG)
-	@$(MAKE) printbuildinfo > $(LAST_BUILD)
 
 # Build with GEOS-Chem core debug flags and without cleaning
 build_mapl_debug:
+	rm -f geos
+	rm -f $(CODEDIR_GC)/bin/geos
 	date > ${BUILD_LOG}
 	rm -f $(CODEDIR_GCHP)/Shared/mapl.install
 	rm -f $(CODEDIR_GCHP)/FVdycoreCubed_GridComp/fvdycore.install
 	./build.sh build --debug 2>&1 | tee -a $(BUILD_LOG)
 	@$(MAKE) printbuildinfo 2>&1 | tee -a $(BUILD_LOG)
-	@$(MAKE) printbuildinfo > $(LAST_BUILD)
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #  Compile GEOS-Chem but not ESMF, MAPL, and FVdycore %
@@ -154,7 +158,6 @@ build_core:
 	date > ${BUILD_LOG}
 	./build.sh build 2>&1 | tee -a $(BUILD_LOG)
 	@$(MAKE) printbuildinfo 2>&1 | tee -a $(BUILD_LOG)
-	@$(MAKE) printbuildinfo > $(LAST_BUILD)
 
 # Build with GEOS-Chem core debug flags and without cleaning
 build_core_debug:
@@ -163,7 +166,6 @@ build_core_debug:
 	date > ${BUILD_LOG}
 	./build.sh build --debug 2>&1 | tee -a $(BUILD_LOG)
 	@$(MAKE) printbuildinfo 2>&1 | tee -a $(BUILD_LOG)
-	@$(MAKE) printbuildinfo > $(LAST_BUILD)
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #  Clean up Run Directory  %
@@ -194,7 +196,6 @@ cleanup_output: cleanup_data cleanup_logs
 cleanup_exe: 
 	rm -f geos
 	rm -f $(BUILD_LOG)
-	rm -f $(LAST_BUILD)
 
 # Clean all source code and the run directory
 superclean:

@@ -21,7 +21,9 @@
 
      MKL_COMPILER = intel_f
 
-     F2PY += --fcompiler=intelem
+     ifeq ($(USE_F2PY),yes)
+      F2PY += --fcompiler=intelem
+     endif
 
      # Determine compiler version
      # --------------------------

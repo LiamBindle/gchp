@@ -59,8 +59,9 @@ LIB_HERMES = $(ESMALIB)/libGMAO_hermes.a
 INC_CHEM_BASE = $(ESMAINC)/Chem_Base
 LIB_CHEM_BASE = $(ESMALIB)/libChem_Base.a
 
-INC_CHEM_SHARED = $(ESMAINC)/Chem_Shared
-LIB_CHEM_SHARED = $(ESMALIB)/libChem_Shared.a
+# Comment out for GCHP
+#INC_CHEM_SHARED = $(ESMAINC)/Chem_Shared
+#LIB_CHEM_SHARED = $(ESMALIB)/libChem_Shared.a
 
 INC_CHEM = $(ESMAINC)/GEOSchem_GridComp
 LIB_CHEM = $(ESMALIB)/libGEOSchem_GridComp.a
@@ -68,21 +69,25 @@ LIB_CHEM = $(ESMALIB)/libGEOSchem_GridComp.a
 INC_GEOS_BASE = $(ESMAINC)/GEOS_Base
 LIB_GEOS_BASE = $(ESMALIB)/libGEOS_Base.a
 
-INC_GEOS_SHARED = $(ESMAINC)/GEOS_Shared
-LIB_GEOS_SHARED = $(ESMALIB)/libGEOS_Shared.a
+# Comment out for GCHP
+#INC_GEOS_SHARED = $(ESMAINC)/GEOS_Shared
+#LIB_GEOS_SHARED = $(ESMALIB)/libGEOS_Shared.a
 
-INC_PILGRIM = $(ESMAINC)/GMAO_pilgrim
-LIB_PILGRIM = $(ESMALIB)/libGMAO_pilgrim.a
+# Comment out for GCHP
+#INC_PILGRIM = $(ESMAINC)/GMAO_pilgrim
+#LIB_PILGRIM = $(ESMALIB)/libGMAO_pilgrim.a
 
 THIS_GFDL_FMS = GFDL_fms
 INC_GFDL_FMS = $(ESMAINC)/$(THIS_GFDL_FMS)
 LIB_GFDL_FMS = $(ESMALIB)/lib$(THIS_GFDL_FMS).a
 
-INC_TRANSF = $(ESMAINC)/GMAO_transf
-LIB_TRANSF = $(ESMALIB)/libGMAO_transf.a
+# Comment out for GCHP
+#INC_TRANSF = $(ESMAINC)/GMAO_transf
+#LIB_TRANSF = $(ESMALIB)/libGMAO_transf.a
 
-INC_LANL_CICE = $(ESMAINC)/LANL_cice
-LIB_LANL_CICE = $(ESMALIB)/libLANL_cice.a
+# Comment out for GCHP
+#INC_LANL_CICE = $(ESMAINC)/LANL_cice
+#LIB_LANL_CICE = $(ESMALIB)/libLANL_cice.a
 
 INC_GMAO_pFIO = $(ESMAINC)/GMAO_pFIO
 LIB_GMAO_pFIO = $(ESMALIB)/libGMAO_pFIO.a
@@ -91,14 +96,17 @@ LIB_GMAO_pFIO = $(ESMALIB)/libGMAO_pFIO.a
 INC_MAPL_BASE = $(ESMAINC)/MAPL_Base
 LIB_MAPL_BASE = $(ESMALIB)/libMAPL_Base.a $(LIB_GMAO_pFIO)
 
-# Change in INC_GMAO_SHARED for GCHP: remove chem_base, lanl_cice; add gmao_pfio
+# Remove unused libraries from INC_GMAO_SHARED for GCHP. Also remove
+# GFDL_FMS to avoid nonexistent include directory messages when compiling with gfortran.
 #INC_GMAO_SHARED = $(INC_MPEU) $(INC_PILGRIM) $(INC_MFHDF3) $(INC_GFIO) \
 #                  $(INC_CFIO) $(INC_MAPL_BASE) $(INC_GEOS_SHARED) $(INC_HERMES) \
 #                  $(INC_CHEM_BASE) $(INC_CHEM_SHARED) $(INC_GFDL_FMS) $(INC_LANL_CICE) \
 #                  $(INC_GMAO_pFIO)
-INC_GMAO_SHARED = $(INC_MPEU)   $(INC_PILGRIM)   $(INC_MFHDF3) $(INC_GFIO) \
-                  $(INC_CFIO)   $(INC_MAPL_BASE) $(INC_GEOS_SHARED)      \
-                  $(INC_HERMES) $(INC_GFDL_FMS)  $(INC_GMAO_pFIO)
+INC_GMAO_SHARED = $(INC_MPEU)   $(INC_MFHDF3)  $(INC_GFIO) \
+                  $(INC_CFIO)   $(INC_MAPL_BASE)                           \
+                  $(INC_HERMES) $(INC_GMAO_pFIO)
+
+# NOTE: most of the rest of this is not used in GCHP, but leave as is for now:
 
 INC_PSAS = $(ESMAINC)/GMAO_psas
 LIB_PSAS = $(ESMALIB)/libGMAO_psas.a
