@@ -3,7 +3,7 @@ esma_set_this()
 add_definitions (-DHERMES -DDEBUG_SHAVE -Dunix -D__unix__)
 # Remove GEOS_Shared for GCHP
 #include_directories (${include_MAPL_Base} ${include_GEOS_Shared})
-include_directories (${include_MAPL_Base}
+include_directories (${include_MAPL_Base})
 include_directories (${include_GMAO_gfio_r8})
 
 string (REPLACE " " ";" flags ${FREAL8})

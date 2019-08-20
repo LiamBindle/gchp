@@ -7,8 +7,6 @@ esma_add_subdirectories(
   GMAO_pFIO 
   MAPL_Base 
   GMAO_hermes
-  GEOS_Shared
-  GMAO_pilgrim
   )
 
 # Special cases - MAPL_cfio, GMAO_gfio, and GFDL_fms are built twice with two

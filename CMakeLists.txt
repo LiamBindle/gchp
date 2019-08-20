@@ -46,7 +46,7 @@ endif()
 set(GCHP                    TRUE       PARENT_SCOPE)
 
 target_compile_definitions(BaseTarget INTERFACE 
-        ESMF_ EXTERNAL_GRID USE_REAL8
+        ESMF_ EXTERNAL_GRID USE_REAL8 NC_HAS_COMPRESSION BPCH_TBPC
 )
 target_link_libraries(BaseTarget INTERFACE 
     MAPL_Base 
@@ -101,14 +101,11 @@ if("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
     target_compile_options(GFDL_fms_r8 				PRIVATE ${SUPPRESSED_FLAGS})
     target_compile_options(GMAO_mpeu 				PRIVATE ${SUPPRESSED_FLAGS})
     target_compile_options(MAPL_Base 				PRIVATE ${SUPPRESSED_FLAGS})
-    target_compile_options(GEOS_Shared 				PRIVATE ${SUPPRESSED_FLAGS})
     target_compile_options(fvdycore 				PRIVATE ${SUPPRESSED_FLAGS})
     target_compile_options(FVdycoreCubed_GridComp   PRIVATE ${SUPPRESSED_FLAGS})
-    target_compile_options(GMAO_pilgrim 			PRIVATE ${SUPPRESSED_FLAGS})
 
     target_compile_definitions(GFDL_fms_r4 			PRIVATE GFDL_FMS_SUPPRESS_POINTER_REMARKS)
     target_compile_definitions(GFDL_fms_r8 			PRIVATE GFDL_FMS_SUPPRESS_POINTER_REMARKS)
     target_compile_definitions(GMAO_mpeu 			PRIVATE GFDL_FMS_SUPPRESS_POINTER_REMARKS)
-    target_compile_definitions(GEOS_Shared 			PRIVATE GFDL_FMS_SUPPRESS_POINTER_REMARKS)
     target_compile_definitions(fvdycore 			PRIVATE GFDL_FMS_SUPPRESS_POINTER_REMARKS)
 endif()
