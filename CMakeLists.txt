@@ -51,7 +51,7 @@ target_compile_definitions(BaseTarget INTERFACE
 target_link_libraries(BaseTarget INTERFACE 
     MAPL_Base 
     FVdycoreCubed_GridComp
-    MPI::MPI_C MPI::MPI_Fortran)
+    MPI::MPI_C MPI::MPI_Fortran
 )
 
 # Add the registry
@@ -80,7 +80,7 @@ add_executable(geos
     GEOSChem.F90
 )
 target_link_libraries(geos
-	PUBLIC GIGC
+	PUBLIC GIGC ${CMAKE_DL_LIBS}
 )
 install(TARGETS geos
 	RUNTIME DESTINATION ${RUNDIR}

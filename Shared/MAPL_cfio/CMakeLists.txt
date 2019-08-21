@@ -31,8 +31,7 @@ include_directories (${INC_ESMF})
 set (lib MAPL_cfio_${precision})
 
 esma_add_library (${lib} SRCS ${srcs})
-target_link_libraries (${lib} ${ESMF_LIBRARIES})
-target_link_libraries (${lib} PUBLIC MPI::MPI_C MPI::MPI_Fortran)
+target_link_libraries (${lib} PUBLIC ${ESMF_LIBRARIES} MPI::MPI_C MPI::MPI_Fortran)
   
 if (precision MATCHES "r8")
   string (REPLACE " " ";" flags ${FREAL8})
