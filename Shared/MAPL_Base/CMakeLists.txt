@@ -70,6 +70,7 @@ set (srcs
 
 esma_add_library(${this} SRCS ${srcs} DEPENDENCIES GMAO_pFIO MAPL_cfio_r4)
 target_compile_options (${this} PRIVATE $<$<COMPILE_LANGUAGE:Fortran>:${OpenMP_Fortran_FLAGS}>)
+target_link_libraries (${this} PUBLIC MPI::MPI_C MPI::MPI_Fortran)
 
 # Kludge for OSX security and DYLD_LIBRARY_PATH ...
 foreach(dir ${OSX_EXTRA_LIBRARY_PATH})

@@ -19,6 +19,7 @@ set (srcs
 
 esma_add_library(${this} SRCS ${srcs} DEPENDENCIES GMAO_mpeu GMAO_gfio_r8)
 target_compile_options(${this} PRIVATE ${flags})
+target_link_libraries (${this} PUBLIC MPI::MPI_C MPI::MPI_Fortran)
 
 set (CMAKE_Fortran_FLAGS_RELEASE "-O3 ${common_Fortran_flags} ${common_Fortran_fpe_flags} ${ALIGNCOM}")
 

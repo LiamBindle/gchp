@@ -26,7 +26,7 @@ else ()
   string(REPLACE " " ";" tmp ${FREAL8})
 endif ()
 
-set(dependencies MAPL_Base GMAO_hermes GEOS_Shared)
+set(dependencies MAPL_Base GMAO_hermes)
 esma_add_library (${this}
   SRCS ${srcs}
   SUBCOMPONENTS fvdycore

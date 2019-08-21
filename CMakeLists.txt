@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.5)
+cmake_minimum_required (VERSION 3.10.3)
 project(GCHP VERSION 12.4.0 LANGUAGES Fortran CXX C)
 cmake_policy(SET CMP0054 NEW)
 cmake_policy(SET CMP0057 NEW)
@@ -51,6 +51,7 @@ target_compile_definitions(BaseTarget INTERFACE
 target_link_libraries(BaseTarget INTERFACE 
     MAPL_Base 
     FVdycoreCubed_GridComp
+    MPI::MPI_C MPI::MPI_Fortran)
 )
 
 # Add the registry

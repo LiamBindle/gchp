@@ -45,7 +45,7 @@ set(srcs
 esma_add_library(${this} SRCS ${srcs})
 
 # Other dependencies
-target_link_libraries(${this} PUBLIC ${MPI_Fortran_LIBRARIES})
+target_link_libraries (${this} PUBLIC MPI::MPI_C MPI::MPI_Fortran)
 target_include_directories(${this} PUBLIC ${MPI_Fortran_INCLUDE_PATH})
 
 #############################################################

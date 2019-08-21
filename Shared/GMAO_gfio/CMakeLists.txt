@@ -29,6 +29,7 @@ set_target_properties (${this} PROPERTIES Fortran_MODULE_DIRECTORY ${include_${t
 target_link_libraries (${this} PUBLIC ${ESMF_LIBRARIES})
 target_include_directories (${this} PUBLIC ${INC_ESMF})
 target_include_directories (${this} PUBLIC ${INC_NETCDF})
+target_link_libraries (${this} PUBLIC MPI::MPI_C MPI::MPI_Fortran)
   
 # Specs for r8 version
 if (precision STREQUAL "r8")

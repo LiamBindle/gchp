@@ -96,6 +96,7 @@ esma_add_library(${this} SRCS ${srcs})
 #--------------------
 target_include_directories (${this} PUBLIC ${INC_ESMF} ${INC_gFTL} ${INC_NETCDF})
 target_link_libraries (${this} PUBLIC ${ESMF_LIBRARIES} ${MPI_Fortran_LIBRARIES})
+target_link_libraries (${this} PUBLIC MPI::MPI_C MPI::MPI_Fortran)
 
 # Comment out for GCHP
 #include_directories (${INC_FLAP})
